@@ -25,9 +25,10 @@ def main():
     equation.calculateAndPrint()
             
 class Equation:
-    a:int
-    b:int
-    c:int
+    def __init__(self):
+        self.a=0
+        self.b=0
+        self.c=0
     
     def calculateAndPrint(self):
         d=int(math.pow(self.b,2))-4*self.a*self.c
@@ -38,5 +39,6 @@ class Equation:
             print("Ans 1",float(self.b)/(2*float(self.a)))
         else:
             print("Discriminant < 0")
+
 
 main()
