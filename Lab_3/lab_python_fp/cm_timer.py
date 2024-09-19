@@ -4,7 +4,7 @@ import time
 class cm_timer_1:
        def __enter__(self):
            self.start_time=time.time()
-           return self  # Можно вернуть объект, который будет доступен в блоке with
+           return self  
 
        def __exit__(self, exc_type, exc_value, traceback):
              end_time=time.time()
@@ -13,9 +13,9 @@ class cm_timer_1:
         
 @contextmanager
 def cm_timer_2():
-    start_time = time.time()  # Запоминаем время начала
-    yield  # Передаем управление в блок кода
-    end_time = time.time()  # Запоминаем время конца
+    start_time = time.time()  
+    yield  
+    end_time = time.time()  
     print(f"Время выполнения cm_timer_2: {end_time - start_time:.6f} секунд")
 
 

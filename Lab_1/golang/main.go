@@ -46,7 +46,7 @@ func readFromConsole() (int, int, int) {
 	for {
 		_, err := fmt.Fscanf(r, "%d %d %d\n", &a, &b, &c)
 		if err != nil {
-			log.Println(err)
+			log.Println("incorrect input")
 			r.Reset(os.Stdin)
 			continue
 		}
@@ -56,14 +56,36 @@ func readFromConsole() (int, int, int) {
 }
 
 func calculateAndPrintEquation(a, b, c int) {
-	d := int(math.Pow(float64(b), 2)) - 4*a*c
+	d := b*b - 4*a*c
+
 	switch {
 	case d > 0:
-		fmt.Printf("Ans 1: %f\n", (-float64(b)-math.Sqrt(float64(d)))/(2.0*float64(a)))
-		fmt.Printf("Ans 2: %f\n", (-float64(b)+math.Sqrt(float64(d)))/(2.0*float64(a)))
-	case d < 0:
-		fmt.Println("discriminant < 0")
+		t1 := (-float64(b) - math.Sqrt(float64(d))) / (2.0 * float64(a))
+		t2 := (-float64(b) + math.Sqrt(float64(d))) / (2.0 * float64(a))
+
+		var roots []float64
+		if t1 >= 0 {
+			roots = append(roots, math.Sqrt(t1), -math.Sqrt(t1))
+		}
+		if t2 >= 0 {
+			roots = append(roots, math.Sqrt(t2), -math.Sqrt(t2))
+		}
+
+		if len(roots) > 0 {
+			fmt.Println("Roots:", roots)
+		} else {
+			fmt.Println("No real roots")
+		}
+
 	case d == 0:
-		fmt.Printf("Ans 1: %f\n", -float64(b)/(2.0*float64(a)))
+		t := -float64(b) / (2.0 * float64(a))
+		if t >= 0 {
+			fmt.Println("Roots:", math.Sqrt(t), -math.Sqrt(t))
+		} else {
+			fmt.Println("No real roots")
+		}
+
+	case d < 0:
+		fmt.Println("Discriminant < 0, no real roots")
 	}
 }
