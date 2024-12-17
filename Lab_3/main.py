@@ -1,4 +1,4 @@
-import Lab_3.lab_python_fp.field
+import lab_python_fp.field
 import lab_python_fp.gen_random
 import lab_python_fp.unique
 
